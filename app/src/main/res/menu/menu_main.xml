@@ -10,4 +10,16 @@
           android:title="@string/action_export"
           android:orderInCategory="100"
           app:showAsAction="never"/>
+    <item android:id="@+id/action_import_products"
+          android:title="@string/action_import_products"
+          android:orderInCategory="100"
+          app:showAsAction="never"/>
+    <item android:id="@+id/action_import_theken"
+          android:title="@string/action_import_theken"
+          android:orderInCategory="100"
+          app:showAsAction="never"/>
+    <item android:id="@+id/action_import_bietet_an"
+          android:title="@string/action_import_bietet_an"
+          android:orderInCategory="100"
+          app:showAsAction="never"/>
 </menu>
