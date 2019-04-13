@@ -20,13 +20,17 @@ import org.jetbrains.anko.uiThread
 import java.util.*
 import android.hardware.usb.UsbDevice.getDeviceId
 import android.content.Context.TELEPHONY_SERVICE
+import android.os.Build
 import android.provider.Settings
 import androidx.core.content.ContextCompat.getSystemService
 import android.telephony.TelephonyManager
 
 import android.provider.Settings.System
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import org.jetbrains.anko.find
 
 class BuyActivity : AppCompatActivity() {
@@ -37,8 +41,16 @@ class BuyActivity : AppCompatActivity() {
         setContentView(R.layout.activity_buy)
         setSupportActionBar(toolbar)
 
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
-        actionBar?.hide()
+
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE
+                // Set the content to appear under the system bars so that the
+                // content doesn't resize when the system bars hide and show.
+                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                // Hide the nav bar and status bar
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_FULLSCREEN)
 
         supportActionBar?.displayOptions= ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
