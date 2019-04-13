@@ -2,6 +2,7 @@ package info.mathphys.schatztruhe
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu
@@ -15,6 +16,9 @@ import info.mathphys.schatztruhe.data.ThekenListAdapter
 import info.mathphys.schatztruhe.data.ThekenViewModel
 
 import kotlinx.android.synthetic.main.activity_main.*
+import androidx.recyclerview.widget.GridLayoutManager
+
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mThekenViewModel: ThekenViewModel
@@ -26,6 +30,8 @@ class MainActivity : AppCompatActivity() {
 
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
+        //recyclerView.addItemDecoration(GridItemDecoration(10,2))
         mThekenViewModel = ViewModelProviders.of(this).get(ThekenViewModel::class.java)
         val adapter = ThekenListAdapter(this)
         mThekenViewModel.allTheken.observe(this, Observer { words ->
@@ -33,7 +39,16 @@ class MainActivity : AppCompatActivity() {
             words?.let { adapter.setTheken(it) }
         })
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter.onItemClick = { item ->
+
+            // do something with your item
+            Log.d("CLICKED", item.name)
+            val intent = Intent(this, ProductActivity::class.java).apply {
+
+            }
+            intent.putExtra("THEKE_ID",item.id)
+            startActivity(intent)
+        }
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()

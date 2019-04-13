@@ -15,4 +15,7 @@ interface ThekeDao {
 
     @Query("DELETE FROM theke_table")
     fun deleteAll()
+
+    @Query("SELECT * from theke_table WHERE id=:theken_id ORDER BY name ASC LIMIT 1")
+    fun getTheke(theken_id: Long): Theke
 }

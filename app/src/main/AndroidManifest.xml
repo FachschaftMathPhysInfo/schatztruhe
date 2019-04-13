@@ -10,6 +10,24 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
+                android:name=".BuyActivity"
+                android:label="@string/title_activity_buy"
+                android:parentActivityName=".ProductActivity"
+                android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="info.mathphys.schatztruhe.ProductActivity"/>
+        </activity>
+        <activity
+                android:name=".ProductActivity"
+                android:label="@string/title_activity_product"
+                android:parentActivityName=".MainActivity"
+                android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="info.mathphys.schatztruhe.MainActivity"/>
+        </activity>
+        <activity
                 android:name=".SettingsActivity"
                 android:label="@string/title_activity_settings"
                 android:parentActivityName=".MainActivity">
@@ -27,6 +45,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-    </application>
 
+    </application>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 </manifest>

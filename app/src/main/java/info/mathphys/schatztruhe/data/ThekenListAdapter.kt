@@ -14,15 +14,21 @@ class ThekenListAdapter internal constructor(
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var theken = emptyList<Theke>() // Cached copy of words
-
+    var onItemClick: ((Theke) -> Unit)? = null
     inner class ThekeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val wordItemView: TextView = itemView.findViewById(R.id.textView)
+        init {
+            itemView.setOnClickListener {
+                onItemClick?.invoke(theken[adapterPosition])
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThekeViewHolder {
         val itemView = inflater.inflate(R.layout.recyclerview_theke_item, parent, false)
         return ThekeViewHolder(itemView)
     }
+
 
     override fun onBindViewHolder(holder: ThekeViewHolder, position: Int) {
         val current = theken[position]

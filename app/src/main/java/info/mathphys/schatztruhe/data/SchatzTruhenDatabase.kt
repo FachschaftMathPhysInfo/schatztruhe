@@ -11,6 +11,8 @@ import androidx.room.TypeConverters
  abstract class SchatzTruhenDatabase : RoomDatabase() {
     abstract fun thekeDao(): ThekeDao
     abstract fun productDao():ProductDao
+    abstract fun bietet_anDao():bietet_anDao
+    abstract fun verkauftDao():verkauftDao
     companion object {
         @Volatile
         private var INSTANCE: SchatzTruhenDatabase? = null
