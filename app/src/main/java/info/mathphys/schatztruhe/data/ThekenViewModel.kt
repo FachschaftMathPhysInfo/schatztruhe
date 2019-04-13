@@ -22,6 +22,7 @@ class ThekenViewModel(application: Application) : AndroidViewModel(application) 
     private val bietet_anDao:bietet_anDao
     private val verkauft_repository: verkauftRepository
     val allTheken: LiveData<List<Theke>>
+    val anyProducts: List<Product>
     val allverkauft: List<verkauft>
     init {
         val thekenDao = SchatzTruhenDatabase.getDatabase(application).thekeDao()
@@ -32,6 +33,7 @@ class ThekenViewModel(application: Application) : AndroidViewModel(application) 
         verkauft_repository= verkauftRepository(verkauftDao)
         product_repository = ProductRepository(productDao,bietet_anDao,-1)
         allTheken = repository.allTheken
+        anyProducts = productDao.getAnyProducts()
         allverkauft= verkauft_repository.allverkauft
     }
 

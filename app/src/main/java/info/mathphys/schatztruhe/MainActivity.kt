@@ -158,7 +158,7 @@ class MainActivity : AppCompatActivity() {
                     val now = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss")
                     val datetimeStr = now.format(Date())
 
-                    val CSV_HEADER = "anzahl,product_id,theke_id,verschenkt,zeitpunkt,tablet_imei,"
+                    val CSV_HEADER = "anzahl,product_id,theke_id,theke_name,product_name,verschenkt,zeitpunkt,tablet_imei,"
 
                     val verkauftFile = File(
                         Environment.getExternalStoragePublicDirectory(
@@ -181,6 +181,10 @@ class MainActivity : AppCompatActivity() {
                             fileWriter.append(item.product_id.toString())
                             fileWriter.append(',')
                             fileWriter.append(item.theke_id.toString())
+                            fileWriter.append(',')
+                            fileWriter.append(mThekenViewModel.allTheken.value?.find { it-> it.id!!.equals(item.theke_id) }?.name)
+                            fileWriter.append(',')
+                            fileWriter.append(mThekenViewModel.anyProducts.find { it-> it.id!!.equals(item.product_id) }?.name)
                             fileWriter.append(',')
                             fileWriter.append(item.verschenkt.toString())
                             fileWriter.append(',')
