@@ -17,12 +17,16 @@ class ThekenViewModel(application: Application) : AndroidViewModel(application) 
     private val scope = CoroutineScope(coroutineContext)
 
     private val repository: ThekeRepository
+    private val verkauft_repository: verkauftRepository
     val allTheken: LiveData<List<Theke>>
-
+    val allverkauft: LiveData<List<verkauft>>
     init {
         val thekenDao = SchatzTruhenDatabase.getDatabase(application).thekeDao()
+        val verkauftDao = SchatzTruhenDatabase.getDatabase(application).verkauftDao()
         repository = ThekeRepository(thekenDao)
+        verkauft_repository= verkauftRepository(verkauftDao)
         allTheken = repository.allTheken
+        allverkauft= verkauft_repository.allverkauft
     }
 
     fun insert(theke: Theke) = scope.launch(Dispatchers.IO) {
