@@ -62,7 +62,7 @@ class BuyActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
                 gift.setOnClickListener { view ->
-                    mverkauftViewModel.insert(verkauft(anzahl = count,verschenkt = false,
+                    mverkauftViewModel.insert(verkauft(anzahl = count,verschenkt = true,
                         product_id =mverkauftViewModel.product_id,theke_id = mverkauftViewModel.theken_id,zeitpunkt = Date(),
                         tablet_imei=System.getString(self.getContentResolver(), Settings.Secure.ANDROID_ID)))
                     val intent = Intent(self, ProductActivity::class.java).apply {
