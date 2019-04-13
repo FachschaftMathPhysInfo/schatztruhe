@@ -1,9 +1,12 @@
 package info.mathphys.schatztruhe
 
+import android.Manifest
+import android.app.AlertDialog
 import java.io.File
 import java.io.FileWriter
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -12,6 +15,8 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -67,7 +72,58 @@ class MainActivity : AppCompatActivity() {
                 mThekenViewModel.insert(Theke("Shotbar"))
             }
         }
+        setupPermissions()
     }
+
+    private val READ_EXTERNAL_REQUEST_CODE = 101
+    private val WRITE_EXTERNAL_REQUEST_CODE = 102
+    private val READ_PHONE_REQUEST_CODE = 103
+
+    private fun makeRequest() {
+        ActivityCompat.requestPermissions(this,
+            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+            READ_EXTERNAL_REQUEST_CODE)
+        ActivityCompat.requestPermissions(this,
+            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+            WRITE_EXTERNAL_REQUEST_CODE)
+        ActivityCompat.requestPermissions(this,
+            arrayOf(Manifest.permission.READ_PHONE_STATE),
+            READ_PHONE_REQUEST_CODE)
+    }
+
+    private fun setupPermissions() {
+        val permissions = listOf(
+            ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE),
+            ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE),
+            ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
+        )
+
+        for (permission in permissions) {
+            if (permission != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(
+                        this,
+                        Manifest.permission.RECORD_AUDIO
+                    )
+                ) {
+                    val builder = AlertDialog.Builder(this)
+                    builder.setMessage("Permission to access external storage required")
+                        .setTitle("Permission required")
+
+                    builder.setPositiveButton(
+                        "OK"
+                    ) { dialog, id ->
+                        makeRequest()
+                    }
+
+                    val dialog = builder.create()
+                    dialog.show()
+                } else {
+                    makeRequest()
+                }
+            }
+        }
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -75,9 +131,6 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    /**
-     *
-     */
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
