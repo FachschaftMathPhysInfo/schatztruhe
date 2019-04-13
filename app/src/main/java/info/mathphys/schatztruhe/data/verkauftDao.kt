@@ -9,7 +9,7 @@ import androidx.room.Query
 interface verkauftDao {
 
     @Query("SELECT * from verkauft_table  ORDER BY id asc")
-    fun getAllverkauft(): LiveData<List<verkauft>>
+    fun getAllverkauft(): List<verkauft>
 
     @Insert
     fun insert(product: verkauft)
