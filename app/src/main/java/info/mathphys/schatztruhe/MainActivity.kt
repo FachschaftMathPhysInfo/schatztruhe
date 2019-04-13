@@ -69,11 +69,6 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("THEKE_ID", item.id)
                 startActivity(intent)
             }
-            fab.setOnClickListener { view ->
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-                mThekenViewModel.insert(Theke("Shotbar"))
-            }
         }
         setupPermissions()
     }
