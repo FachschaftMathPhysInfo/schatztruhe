@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 
 import kotlinx.android.synthetic.main.activity_product.*
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import info.mathphys.schatztruhe.data.*
+import kotlinx.android.synthetic.main.content_product.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
@@ -22,6 +24,7 @@ import org.jetbrains.anko.uiThread
 class ProductActivity : AppCompatActivity() {
 
     private lateinit var mProductsViewModel : ProductsViewModel
+    var count: Long=1
     override fun onCreate(savedInstanceState: Bundle?) {
 
 
@@ -44,7 +47,7 @@ class ProductActivity : AppCompatActivity() {
             uiThread {
                 supportActionBar?.customView?.findViewById<TextView>(R.id.action_bar_title)?.text=text
                 val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-                recyclerView.layoutManager = GridLayoutManager(self, 2)
+                recyclerView.layoutManager = GridLayoutManager(self, 3)
                 val adapter = ProductsListAdapter(self)
                 mProductsViewModel.allProducts.observe(self, Observer { words ->
                     // Update the cached copy of the words in the adapter.
@@ -60,19 +63,45 @@ class ProductActivity : AppCompatActivity() {
                     }
                     intent.putExtra("THEKE_ID",mProductsViewModel.theken_id)
                     intent.putExtra("PRODUCT_ID",item.id)
+                    intent.putExtra("COUNT",count)
                     startActivity(intent)
                 }
             }
         }
-        fab.setOnClickListener { view ->
-            var product = Product("Bier")
-            Log.d("ID",product.id.toString())
-            mProductsViewModel.insert(product)
-            mProductsViewModel.insert(bietet_an(product_id = 1,theke_id = mProductsViewModel.theken_id))
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        one.setOnClickListener { view->
+            resetColors()
+            view.setBackgroundColor(ContextCompat.getColor(self,R.color.colorSelect))
+            self.count =1
+        }
+        two.setOnClickListener { view->
+            resetColors()
+            view.setBackgroundColor(ContextCompat.getColor(self,R.color.colorSelect))
+            self.count =2
+        }
+        three.setOnClickListener { view->
+            resetColors()
+            view.setBackgroundColor(ContextCompat.getColor(self,R.color.colorSelect))
+            self.count =3
+        }
+        four.setOnClickListener { view->
+            resetColors()
+            view.setBackgroundColor(ContextCompat.getColor(self,R.color.colorSelect))
+            self.count =4
+        }
+        five.setOnClickListener { view->
+            resetColors()
+            view.setBackgroundColor(ContextCompat.getColor(self,R.color.colorSelect))
+            self.count =5
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun resetColors() {
+        one.setBackgroundColor(ContextCompat.getColor(this,R.color.button_material_light))
+        two.setBackgroundColor(ContextCompat.getColor(this,R.color.button_material_light))
+        three.setBackgroundColor(ContextCompat.getColor(this,R.color.button_material_light))
+        four.setBackgroundColor(ContextCompat.getColor(this,R.color.button_material_light))
+        five.setBackgroundColor(ContextCompat.getColor(this,R.color.button_material_light))
     }
 
 }

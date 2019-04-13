@@ -25,6 +25,8 @@ import androidx.core.content.ContextCompat.getSystemService
 import android.telephony.TelephonyManager
 
 import android.provider.Settings.System
+import android.widget.Button
+import org.jetbrains.anko.find
 
 class BuyActivity : AppCompatActivity() {
     private lateinit var mverkauftViewModel: verkauftViewModel
@@ -34,8 +36,9 @@ class BuyActivity : AppCompatActivity() {
         setContentView(R.layout.activity_buy)
         setSupportActionBar(toolbar)
         supportActionBar?.displayOptions= ActionBar.DISPLAY_SHOW_CUSTOM
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setCustomView(R.layout.actionbar_theke)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        supportActionBar?.setCustomView(R.layout.actionbar_buy)
+
         count= intent.getLongExtra("COUNT",1)
         val self = this
         doAsync {
@@ -68,10 +71,17 @@ class BuyActivity : AppCompatActivity() {
                     intent.putExtra("THEKE_ID",mverkauftViewModel.theken_id)
                     startActivity(intent)
                 }
+                supportActionBar?.customView?.find<Button>(R.id.action_bar_abort)?.setOnClickListener { view->
+                    val intent = Intent(self, ProductActivity::class.java).apply {
+
+                    }
+                    intent.putExtra("THEKE_ID",mverkauftViewModel.theken_id)
+                    startActivity(intent)
+                }
             }
         }
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
 
 }
