@@ -77,4 +77,7 @@
     <string name="title_activity_product">ProductActivity</string>
     <string name="title_activity_buy">BuyActivity</string>
     <string name="action_export">Exportieren</string>
+    <string name="action_import_products">Produkte importieren</string>
+    <string name="action_import_theken">Import Theken</string>
+    <string name="action_import_bietet_an">Import Verknüpfungen</string>
 </resources>
