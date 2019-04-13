@@ -4,6 +4,7 @@ import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import com.google.android.material.snackbar.Snackbar
@@ -32,6 +33,10 @@ class ProductActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_product)
         setSupportActionBar(toolbar)
+
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+        actionBar?.hide()
+
         supportActionBar?.displayOptions= ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setCustomView(R.layout.actionbar_theke)
@@ -68,6 +73,8 @@ class ProductActivity : AppCompatActivity() {
                 }
             }
         }
+        resetColors()
+        one.setBackgroundColor(ContextCompat.getColor(self,R.color.colorSelect))
         one.setOnClickListener { view->
             resetColors()
             view.setBackgroundColor(ContextCompat.getColor(self,R.color.colorSelect))

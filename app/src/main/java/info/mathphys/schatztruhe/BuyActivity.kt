@@ -25,6 +25,7 @@ import androidx.core.content.ContextCompat.getSystemService
 import android.telephony.TelephonyManager
 
 import android.provider.Settings.System
+import android.view.View
 import android.widget.Button
 import org.jetbrains.anko.find
 
@@ -35,6 +36,10 @@ class BuyActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_buy)
         setSupportActionBar(toolbar)
+
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+        actionBar?.hide()
+
         supportActionBar?.displayOptions= ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
         supportActionBar?.setCustomView(R.layout.actionbar_buy)

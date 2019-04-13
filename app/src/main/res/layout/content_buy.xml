@@ -17,16 +17,24 @@
         <Button
                 android:id="@+id/buy"
                 android:text="VERKAUFEN"
+                android:textSize="30dp"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight=".50" />
+                android:layout_weight=".50"
+                android:background="@color/colorSelectDark"
+                android:textColor="@color/colorWhite"
+        />
 
         <Button
                 android:id="@+id/gift"
                 android:text="VERSCHENKEN"
+                android:textSize="30dp"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight=".50" />
+                android:layout_weight=".50"
+                android:background="@color/colorREDdark"
+                android:textColor="@color/colorWhite"
+        />
 
     </LinearLayout>
 

@@ -25,16 +25,16 @@
                         android:layout_height="92dp"
 
                         android:orientation="horizontal" android:layout_below="@+id/recyclerview" android:id="@+id/but">
-            <Button android:id="@+id/one" android:background="@color/colorSelect" android:layout_width="0dp"
-                    android:textSize="48dp" android:layout_weight=".50"   android:layout_height="wrap_content" android:text="1" />
-            <Button android:id="@+id/two"  android:layout_width="0dp"
-                    android:textSize="48dp" android:layout_weight=".50" android:layout_height="wrap_content" android:text="2"/>
-            <Button android:id="@+id/three"  android:layout_width="0dp"
-                    android:textSize="48dp" android:layout_weight=".50" android:layout_height="wrap_content" android:text="3"/>
+            <Button android:id="@+id/one"   android:background="@color/colorSelect" android:layout_width="0dp"
+                    android:textSize="48dp" android:layout_weight=".50" android:height="100dp" android:layout_height="wrap_content" android:text="1" />
+            <Button android:id="@+id/two"   android:layout_width="0dp"
+                    android:textSize="48dp" android:layout_weight=".50" android:height="100dp" android:layout_height="wrap_content" android:text="2"/>
+            <Button android:id="@+id/three" android:layout_width="0dp"
+                    android:textSize="48dp" android:layout_weight=".50" android:height="100dp" android:layout_height="wrap_content" android:text="3"/>
             <Button android:id="@+id/four"  android:layout_width="0dp"
-                    android:textSize="48dp" android:layout_weight=".50" android:layout_height="wrap_content" android:text="4"/>
+                    android:textSize="48dp" android:layout_weight=".50" android:height="100dp" android:layout_height="wrap_content" android:text="4"/>
             <Button android:id="@+id/five"  android:layout_width="0dp"
-                    android:textSize="48dp" android:layout_weight=".50" android:layout_height="wrap_content" android:text="5"/>
+                    android:textSize="48dp" android:layout_weight=".50" android:height="100dp" android:layout_height="wrap_content" android:text="5"/>
         </LinearLayout>
     </LinearLayout>
 
