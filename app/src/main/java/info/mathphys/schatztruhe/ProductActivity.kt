@@ -57,13 +57,24 @@ class ProductActivity : AppCompatActivity() {
                 .get(ProductsViewModel::class.java)
             val text = mProductsViewModel.theke.name
             uiThread {
+
+
+
                 supportActionBar?.customView?.findViewById<TextView>(R.id.action_bar_title)?.text=text
                 val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-                recyclerView.layoutManager = GridLayoutManager(self, 3)
                 val adapter = ProductsListAdapter(self)
                 mProductsViewModel.allProducts.observe(self, Observer { words ->
                     // Update the cached copy of the words in the adapter.
-                    words?.let { adapter.setProducts(it) }
+                    words?.let { adapter.setProducts(it)
+                        /**
+                         * Calculate count of columns
+                         */
+                        var columns: Int = 3
+                        if (words.size > 9){
+                            columns = 4
+                        }
+                        recyclerView.layoutManager = GridLayoutManager(self, columns)
+                    }
                 })
                 recyclerView.adapter = adapter
                 adapter.onItemClick = { item ->
