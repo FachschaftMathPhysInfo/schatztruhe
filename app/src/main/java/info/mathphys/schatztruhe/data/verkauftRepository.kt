@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 
 class verkauftRepository(private val verkauftDao: verkauftDao) {
 
-    val allverkauft: LiveData<List<verkauft>> = verkauftDao.getAllverkauft()
+    val allverkauft: List<verkauft> = verkauftDao.getAllverkauft()
     @WorkerThread
     suspend fun insert(verkauft: verkauft) {
         verkauftDao.insert(verkauft)
