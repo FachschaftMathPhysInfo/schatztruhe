@@ -42,8 +42,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
-        actionBar?.hide()
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE
+                // Set the content to appear under the system bars so that the
+                // content doesn't resize when the system bars hide and show.
+                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                // Hide the nav bar and status bar
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_FULLSCREEN)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         recyclerView.layoutManager = GridLayoutManager(this, 2)
@@ -151,7 +158,7 @@ class MainActivity : AppCompatActivity() {
                     val now = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss")
                     val datetimeStr = now.format(Date())
 
-                    val CSV_HEADER = "id,anzahl,product_id,theke_id,verschenkt,zeitpunkt,tablet_imei,"
+                    val CSV_HEADER = "id,anzahl,product_id,theke_id,thekenName,produktName,verschenkt,zeitpunkt,tablet_imei,"
 
                     val verkauftFile = File(
                         Environment.getExternalStoragePublicDirectory(
@@ -176,6 +183,10 @@ class MainActivity : AppCompatActivity() {
                             fileWriter.append(item.product_id.toString())
                             fileWriter.append(',')
                             fileWriter.append(item.theke_id.toString())
+                            fileWriter.append(',')
+                            fileWriter.append(mThekenViewModel.allTheken.value?.find { it-> it.id!!.equals(item.theke_id) }?.name)
+                            fileWriter.append(',')
+                            fileWriter.append(mThekenViewModel.anyProducts.find { it-> it.id!!.equals(item.product_id) }?.name)
                             fileWriter.append(',')
                             fileWriter.append(item.verschenkt.toString())
                             fileWriter.append(',')

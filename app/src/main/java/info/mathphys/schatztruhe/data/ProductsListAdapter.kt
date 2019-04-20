@@ -35,13 +35,18 @@ class ProductsListAdapter internal constructor(
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val current = products[position]
+        var is_red : Boolean = true
+
         holder.wordItemView.text = current.name
-        if (position%2 == 0){
+        if (products.size < 10){
+            is_red = (position%2 == 0)
+        } else {
+            is_red = ((position+(position/4)%2)%2 == 0)
+        }
+
+        if (is_red){
             holder.wordItemView.setBackgroundColor(ContextCompat.getColor(holder.wordItemView.context, R.color.colorRED))
             holder.wordItemBoxView.setBackgroundColor(ContextCompat.getColor(holder.wordItemView.context, R.color.colorRED))
-        } else {
-            holder.wordItemView.setBackgroundColor(ContextCompat.getColor(holder.wordItemView.context, R.color.colorBLUE))
-            holder.wordItemBoxView.setBackgroundColor(ContextCompat.getColor(holder.wordItemView.context, R.color.colorBLUE))
         }
 
     }

@@ -7,6 +7,7 @@ class ProductRepository(private val productDao: ProductDao,private val bietet_an
 
     val allProducts: LiveData<List<Product>> = productDao.getAllProducts(theke_id)
 
+
     @WorkerThread
     suspend fun insert(product: Product) {
         productDao.insert(product)

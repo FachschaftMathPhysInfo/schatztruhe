@@ -11,6 +11,9 @@ interface ProductDao {
     @Query("SELECT * from product_table JOIN bietet_an_table ON product_id=product_table.id WHERE theke_id=:theke_id ORDER BY name ASC")
     fun getAllProducts( theke_id:Long): LiveData<List<Product> >
 
+    @Query("SELECT * from product_table ORDER BY name ASC")
+    fun getAnyProducts(): List<Product>
+
     @Insert
     fun insert(product: Product)
 

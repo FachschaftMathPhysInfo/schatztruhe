@@ -34,8 +34,15 @@ class ProductActivity : AppCompatActivity() {
         setContentView(R.layout.activity_product)
         setSupportActionBar(toolbar)
 
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
-        actionBar?.hide()
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE
+                // Set the content to appear under the system bars so that the
+                // content doesn't resize when the system bars hide and show.
+                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                // Hide the nav bar and status bar
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_FULLSCREEN)
 
         supportActionBar?.displayOptions= ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -50,13 +57,24 @@ class ProductActivity : AppCompatActivity() {
                 .get(ProductsViewModel::class.java)
             val text = mProductsViewModel.theke.name
             uiThread {
+
+
+
                 supportActionBar?.customView?.findViewById<TextView>(R.id.action_bar_title)?.text=text
                 val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-                recyclerView.layoutManager = GridLayoutManager(self, 3)
                 val adapter = ProductsListAdapter(self)
                 mProductsViewModel.allProducts.observe(self, Observer { words ->
                     // Update the cached copy of the words in the adapter.
-                    words?.let { adapter.setProducts(it) }
+                    words?.let { adapter.setProducts(it)
+                        /**
+                         * Calculate count of columns
+                         */
+                        var columns: Int = 3
+                        if (words.size > 9){
+                            columns = 4
+                        }
+                        recyclerView.layoutManager = GridLayoutManager(self, columns)
+                    }
                 })
                 recyclerView.adapter = adapter
                 adapter.onItemClick = { item ->

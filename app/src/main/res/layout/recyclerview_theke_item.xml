@@ -1,21 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content">
-    <androidx.cardview.widget.CardView android:layout_width="wrap_content"
-                                       android:layout_height="wrap_content">
-        <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-        >
-        <TextView
-            android:id="@+id/textView"
-            style="@style/theke_title"
-            android:layout_width="wrap_content"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+
+>
+    <androidx.cardview.widget.CardView
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_orange_light" />
+            android:background="@android:color/holo_orange_light"
+    >
+
+        <RelativeLayout
+                android:id="@+id/textViewBox"
+                android:layout_width="fill_parent"
+                android:layout_height="96dp"
+                android:padding="16dp"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:background="@android:color/holo_orange_light"
+        >
+            <TextView
+                    android:id="@+id/textView"
+                    style="@style/product_title"
+                    android:layout_width="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:background="@android:color/holo_orange_light"
+                    android:textColor="@color/colorWhite"
+            />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>
