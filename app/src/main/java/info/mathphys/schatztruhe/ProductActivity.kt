@@ -70,7 +70,7 @@ class ProductActivity : AppCompatActivity() {
                          * Calculate count of columns
                          */
                         var columns: Int = 3
-                        if (words.size > 9){
+                        if (words.size > 12){
                             columns = 4
                         }
                         recyclerView.layoutManager = GridLayoutManager(self, columns)

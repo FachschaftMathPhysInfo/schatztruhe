@@ -38,7 +38,7 @@ class ProductsListAdapter internal constructor(
         var is_red : Boolean = true
 
         holder.wordItemView.text = current.name
-        if (products.size < 10){
+        if (products.size < 13){
             is_red = (position%2 == 0)
         } else {
             is_red = ((position+(position/4)%2)%2 == 0)
