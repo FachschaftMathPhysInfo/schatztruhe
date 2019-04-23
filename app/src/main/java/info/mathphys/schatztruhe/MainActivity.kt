@@ -253,8 +253,8 @@ class MainActivity : AppCompatActivity() {
             try {
                 var line: String?
 
-                var fileInputStream: FileInputStream? = null
-                fileInputStream =  FileInputStream ( File(selectedFile?.path));
+                var fileInputStream: InputStream? = null
+                fileInputStream =  contentResolver.openInputStream(selectedFile)
                 var inputStreamReader: InputStreamReader = InputStreamReader(fileInputStream)
                 val fileReader: BufferedReader = BufferedReader(inputStreamReader)
                 // Read CSV header
@@ -293,8 +293,8 @@ class MainActivity : AppCompatActivity() {
             try {
                 var line: String?
 
-                var fileInputStream: FileInputStream? = null
-                fileInputStream =  FileInputStream ( File(selectedFile?.path));
+                var fileInputStream: InputStream? = null
+                fileInputStream =  contentResolver.openInputStream(selectedFile)
                 var inputStreamReader: InputStreamReader = InputStreamReader(fileInputStream)
                 val fileReader: BufferedReader = BufferedReader(inputStreamReader)
                 // Read CSV header
@@ -333,8 +333,8 @@ class MainActivity : AppCompatActivity() {
             try {
                 var line: String?
 
-                var fileInputStream: FileInputStream? = null
-                fileInputStream =  FileInputStream ( File(selectedFile?.path));
+                var fileInputStream: InputStream? = null
+                fileInputStream =  contentResolver.openInputStream(selectedFile)
                 var inputStreamReader: InputStreamReader = InputStreamReader(fileInputStream)
                 val fileReader: BufferedReader = BufferedReader(inputStreamReader)
                 // Read CSV header
